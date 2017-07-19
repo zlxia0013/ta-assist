@@ -12,6 +12,7 @@ import com.tc.ta.util.StringUtil;
 import com.tc.ta.util.exception.ComRuntimeException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.tc.ta.util.exception.ComRuntimeException;
 
 import java.util.Date;
 import java.util.List;
