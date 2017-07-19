@@ -17,7 +17,7 @@
 
 	<import resource="classpath:/spring-datasource.xml"/>
 
-    <!-- 计划任务 -->
+    <!-- 计划任务1 -->
     <task:executor id="executor" pool-size="30" />
     <task:scheduler id="scheduler" pool-size="60" />
     <task:annotation-driven executor="executor" scheduler="scheduler" />
