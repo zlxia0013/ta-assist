@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tc.ta.core.user.dao.UserDao">
+    <sql id="base_column_list" >
+        t.id as id,
+        t.ver_nbr as verNbr,
+        t.name as name,
+        t.pwd as pwd,
+        t.phone as phone,
+        t.full_name as fullName,
+        t.state_id as stateId,
+        t.add_user_id as addUserId,
+        t.add_time as addTime,
+        t.remark as remark
+    </sql>
+
+    <select id="getById" parameterType="java.lang.Integer" resultType="com.tc.ta.core.user.pojo.User">
+        SELECT
+        <include refid="base_column_list" />
+        FROM
+        sys_user t
+        WHERE
+        t.id = #{id}
+    </select>
+
+    <insert id="add" parameterType="com.tc.ta.core.user.pojo.User" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO sys_user
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="verNbr != null" >ver_nbr,</if>
+            <if test="name != null" >name,</if>
+            <if test="pwd != null" >pwd,</if>
+            <if test="role != null" >role,</if>
+            <if test="phone != null" >phone,</if>
+            <if test="fullName != null" >full_name,</if>
+            <if test="stateId != null" >state_id,</if>
+            <if test="addUserId != null" >add_user_id,</if>
+            <if test="addTime != null" >add_time,</if>
+            <if test="remark != null" >remark,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="verNbr != null" >#{verNbr},</if>
+            <if test="name != null" >#{name},</if>
+            <if test="pwd != null" >#{pwd},</if>
+            <if test="role != null" >#{role},</if>
+            <if test="phone != null" >#{phone},</if>
+            <if test="fullName != null" >#{fullName},</if>
+            <if test="stateId != null" >#{stateId},</if>
+            <if test="addUserId != null" >#{addUserId},</if>
+            <if test="addTime != null" >#{addTime},</if>
+            <if test="remark != null" >#{remark},</if>
+        </trim>
+    </insert>
+
+    <update id="update" parameterType="com.tc.ta.core.user.pojo.User">
+        UPDATE
+        sys_user
+        <set>
+            ver_nbr = ver_nbr+1,
+            <if test="name != null" >name = #{name},</if>
+            <if test="pwd != null" >pwd = #{pwd},</if>
+            <if test="role != null" >role = #{role},</if>
+            <if test="phone != null" >phone = #{phone},</if>
+            <if test="fullName != null" >full_name = #{fullName},</if>
+            <if test="stateId != null" >state_id = #{stateId},</if>
+            <if test="addUserId != null" >add_user_id = #{addUserId},</if>
+            <if test="addTime != null" >add_time = #{addTime},</if>
+            <if test="remark != null" >remark = #{remark},</if>
+        </set>
+        WHERE
+        id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="Integer">
+        DELETE FROM
+        sys_user
+        WHERE
+        id = #{id}
+    </delete>
+
+    <select id="searchPojo" parameterType="com.tc.ta.core.user.dto.UserSearchCondition" resultType="com.tc.ta.core.user.pojo.User">
+        SELECT
+        <include refid="base_column_list" />
+        FROM
+        sys_user t
+        WHERE 1=1
+    </select>
+
+    <select id="searchDto" parameterType="com.tc.ta.core.user.dto.UserSearchCondition" resultType="com.tc.ta.core.user.dto.UserDto">
+        SELECT
+        <include refid="base_column_list" />
+        FROM
+        sys_user t
+        WHERE 1=1
+    </select>
+
+    <select id="searchCnt" parameterType="com.tc.ta.core.user.dto.UserSearchCondition" resultType="java.lang.Integer">
+        SELECT
+        count(1)
+        FROM
+        sys_user t
+        WHERE 1=1
+    </select>
+
+    <!--//======================================= new method create here ====================================/-->
+
+    <select id="getByUserName" parameterType="java.lang.String" resultType="com.tc.ta.core.user.pojo.User">
+        SELECT
+        <include refid="base_column_list" />
+        FROM
+        sys_user t
+        WHERE
+        t.name = #{userName}
+    </select>
+
+</mapper>

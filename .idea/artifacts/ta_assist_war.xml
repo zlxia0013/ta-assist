@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="ta-assist:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="ta-assist.war">
+      <element id="artifact" artifact-name="ta-assist:war exploded" />
+    </root>
+  </artifact>
+</component>
