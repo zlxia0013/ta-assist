@@ -5,6 +5,7 @@ import com.tc.ta.core.user.dto.UserDto;
 import com.tc.ta.core.user.dto.UserSearchCondition;
 import com.tc.ta.core.user.pojo.User;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 

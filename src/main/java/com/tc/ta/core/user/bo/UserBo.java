@@ -1,6 +1,8 @@
 package com.tc.ta.core.user.bo;
 
 
+import com.tc.ta.core.role.bo.RoleBo;
+import com.tc.ta.core.role.pojo.Role;
 import com.tc.ta.core.user.SuperUserName;
 import com.tc.ta.core.user.UserStateEnum;
 import com.tc.ta.core.user.dao.UserDao;
@@ -19,6 +21,9 @@ import java.util.List;
 public class UserBo {
     @Autowired
     private UserDao userDao;
+
+    @Autowired
+    private RoleBo roleBo;
 
     public User getById(Integer id) {
         return userDao.getById(id);
@@ -126,6 +131,9 @@ public class UserBo {
         if (!UserStateEnum.enabled(user.getStateId())) {
             throw new ComRuntimeException("您的帐户已被禁用");
         }
+
+        List<Role> roleList = roleBo.searchPojoByUserId(user.getId());
+        user.setRoleList(roleList);
 
         return user;
     }

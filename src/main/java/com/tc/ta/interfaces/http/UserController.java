@@ -26,14 +26,24 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 @Controller
-@RequestMapping(value = "/user")
 public class UserController extends BaseController {
     protected Logger log = Logger.getLogger(this.getClass());
 
     @Autowired
     private UserBo userBo;
 
-    @RequestMapping(value = "/goto_main_page", method = RequestMethod.GET)
+    public static final String URL_ENTITY = "/user";
+    public static final String URL_GOTO_MAIN_PAGE = URL_ENTITY + "/goto_main_page";
+    public static final String URL_GOTO_ADD_PAGE = URL_ENTITY + "/goto_add_page";
+    public static final String URL_GOTO_UPDATE_PAGE = URL_ENTITY + "/goto_update_page";
+    public static final String URL_GOTO_UPDATE_PASSWORD_PAGE = URL_ENTITY + "/goto_update_password_page";
+
+    public static final String URL_ADD = URL_ENTITY + "/add";
+    public static final String URL_UPDATE = URL_ENTITY + "/update";
+    public static final String URL_UPDATE_PASSWORD = URL_ENTITY + "/update_password";
+    public static final String URL_DELETE = URL_ENTITY + "/delete";
+
+    @RequestMapping(value = URL_GOTO_MAIN_PAGE, method = RequestMethod.GET)
     public ModelAndView gotoMainPage(UserSearchCondition usc, HttpSession session) {
         User userInfo = (User) session.getAttribute(CommonKeys.SESSION_USER);
 
@@ -54,7 +64,7 @@ public class UserController extends BaseController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/goto_add_page", method = RequestMethod.GET)
+    @RequestMapping(value = URL_GOTO_ADD_PAGE, method = RequestMethod.GET)
     public ModelAndView gotoAddPage(HttpSession session) {
         User userInfo = (User) session.getAttribute(CommonKeys.SESSION_USER);
 
@@ -65,7 +75,7 @@ public class UserController extends BaseController {
 
 
     @ResponseBody
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @RequestMapping(value = URL_ADD, method = RequestMethod.POST)
     public Json add(User user, HttpSession session) {
         Json json = new Json();
         try {
@@ -86,7 +96,7 @@ public class UserController extends BaseController {
         return json;
     }
 
-    @RequestMapping(value = "/goto_update_page", method = RequestMethod.GET)
+    @RequestMapping(value = URL_GOTO_UPDATE_PAGE, method = RequestMethod.GET)
     public ModelAndView gotoUpdatePage(Integer userId, HttpSession session) {
         User userInfo = (User) session.getAttribute(CommonKeys.SESSION_USER);
 
@@ -99,7 +109,7 @@ public class UserController extends BaseController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    @RequestMapping(value = URL_UPDATE, method = RequestMethod.POST)
     public Json update(User user) {
         Json json = new Json();
         try {
@@ -117,7 +127,7 @@ public class UserController extends BaseController {
         return json;
     }
 
-    @RequestMapping(value = "/goto_update_pwd_page", method = RequestMethod.GET)
+    @RequestMapping(value = URL_GOTO_UPDATE_PASSWORD_PAGE, method = RequestMethod.GET)
     public ModelAndView gotoUpdatePwdPage(HttpSession session) {
         User userInfo = (User) session.getAttribute(CommonKeys.SESSION_USER);
 
@@ -127,7 +137,7 @@ public class UserController extends BaseController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/update_pwd", method = RequestMethod.POST)
+    @RequestMapping(value = URL_UPDATE_PASSWORD, method = RequestMethod.POST)
     public Json updatePwd(String oldPwd, String newPwd, HttpSession session) {
         Json json = new Json();
         try {
@@ -148,7 +158,7 @@ public class UserController extends BaseController {
 
 
     @ResponseBody
-    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    @RequestMapping(value = URL_DELETE, method = RequestMethod.POST)
     public Json delete(Integer userId) {
         Json json = new Json();
         try {

@@ -1,4 +1,5 @@
 <%@ page import="com.tc.ta.interfaces.http.SysStartupController" %>
+<%@ page import="com.tc.ta.interfaces.http.SysLoginController" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -17,28 +18,27 @@
         var path = "${path}";
     </script>
 
-    <link rel="stylesheet" href="/public/adminlte/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="/public/htmleaf/htmleaf-demo.css">
-    <link rel="stylesheet" type="text/css" href="/css/login/login.css">
+    <link rel="stylesheet" href="${path}/public/adminlte/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="${path}/public/htmleaf/htmleaf-demo.css">
+    <link rel="stylesheet" type="text/css" href="${path}/css/login/login.css">
 </head>
 <body>
 <div class="htmleaf-container">
     <header class="htmleaf-header">
-        <h1>TA小助手</h1>
     </header>
     <div class="signin">
         <div class="signin-head"><img src="${path}/img/login/head_120.png" alt="" class="img-circle"></div>
         <form class="form-signin">
-            <input id="txtUserName" type="text" class="form-control" placeholder="用户名" required autofocus value=""/>
-            <input id="txtPassword" type="password" class="form-control" placeholder="密码" required value="" />
+            <input id="txtUserName" type="text" class="form-control" placeholder="用户名" required autofocus value="admin"/>
+            <input id="txtPassword" type="password" class="form-control" placeholder="密码" required value="aa" />
             <input type="button" class="btn btn-lg btn-warning btn-block"  onclick="login()" value="登录"></input>
         </form>
     </div>
 </div>
 
 
-<script type="text/javascript" src="/public/jquery/jquery-1.12.4.min.js"></script>
-<script type="text/javascript" src="/public/adminlte/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="${path}/public/jquery/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="${path}/public/adminlte/bootstrap/js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
     function login(){
@@ -55,7 +55,7 @@
         }
 
         $.ajax({
-            url:"${path}/login",
+            url:"${path}<%=SysLoginController.URL_LOGIN%>",
             type:"post",
             data:{
                 userName:userName,
@@ -64,7 +64,7 @@
             success:function(result){
                 var re = JSON.parse(result);
                 if(re.returnCode=="0"){
-                    window.location.href="${path}/<%=SysStartupController.URL_GOTO_INDEX_PAGE%>";
+                    window.location.href="${path}<%=SysStartupController.URL_GOTO_INDEX_PAGE%>";
                 }else{
                     alert(re.msg);
                 }

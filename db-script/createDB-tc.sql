@@ -488,11 +488,11 @@ CREATE TABLE `sys_privilege` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `i_sys_privilege_code` (`code`),
   UNIQUE KEY `i_sys_privilege_value` (`value`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 /*Data for the table `sys_privilege` */
 
-insert  into `sys_privilege`(`id`,`code`,`value`,`no_limit_access`,`need_login`,`comments`) values (1,'login','/login',1,0,'用户登陆');
+insert  into `sys_privilege`(`id`,`code`,`value`,`no_limit_access`,`need_login`,`comments`) values (1,'goto_index_page','/goto_index_page',1,1,'打开主页'),(2,'goto_login_page','/goto_login_page',1,0,'打开登陆页面'),(3,'login','/login',1,0,'用户登陆'),(4,'logout','/logout',1,0,'用户注销');
 
 /*Table structure for table `sys_role` */
 
@@ -521,6 +521,8 @@ CREATE TABLE `sys_role_privilege` (
 
 /*Data for the table `sys_role_privilege` */
 
+insert  into `sys_role_privilege`(`role_code`,`privilege_code`) values ('ADMIN','login');
+
 /*Table structure for table `sys_user` */
 
 DROP TABLE IF EXISTS `sys_user`;
@@ -538,7 +540,7 @@ CREATE TABLE `sys_user` (
   `remark` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `i_user_name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 /*Data for the table `sys_user` */
 
@@ -555,6 +557,8 @@ CREATE TABLE `sys_user_role` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `sys_user_role` */
+
+insert  into `sys_user_role`(`user_id`,`role_id`) values ('1','1');
 
 /*Table structure for table `tail_ratio` */
 

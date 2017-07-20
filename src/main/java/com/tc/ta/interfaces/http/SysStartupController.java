@@ -1,5 +1,6 @@
 package com.tc.ta.interfaces.http;
 
+import com.tc.ta.core.user.pojo.User;
 import com.tc.ta.util.framework.BaseController;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -16,8 +17,12 @@ public class SysStartupController extends BaseController {
 
     @RequestMapping(value = URL_GOTO_INDEX_PAGE)
     public String gotoIndexPage() {
-        getCurUser();
-        return "common/login";
+        User userInfo = getCurUser();
+        if (userInfo.isAdmin()) {
+            return "redirect:" + UserController.URL_GOTO_MAIN_PAGE;
+        } else {
+            return "common/login";
+        }
     }
 
 

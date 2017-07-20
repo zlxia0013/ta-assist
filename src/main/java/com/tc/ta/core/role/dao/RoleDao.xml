@@ -61,7 +61,7 @@
 	         t.code as code,
 	         t.label as label
 	    FROM 
-			sys_role a
+			sys_role t
 	</select>
 	
 	<select id="searchCnt" parameterType="com.tc.ta.core.role.dto.RoleSearchCondition" resultType="Integer">
@@ -70,6 +70,15 @@
         FROM
         	sys_role t
 	</select>
-	
-	<!--%%NPT%DB_METHOD_INSERT%%-->
+
+	<!--//======================================= new method create here ====================================/-->
+	<select id="searchPojoByUserId" parameterType="Integer" resultType="com.tc.ta.core.role.pojo.Role">
+		SELECT
+		<include refid="base_column_list" />
+		FROM
+		sys_role t, sys_user_role sur
+		WHERE
+		t.id = sur.role_id
+		AND sur.user_id = #{userId}
+	</select>
 </mapper>

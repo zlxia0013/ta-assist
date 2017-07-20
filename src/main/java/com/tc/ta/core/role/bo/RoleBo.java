@@ -55,4 +55,8 @@ public class RoleBo {
         RoleSearchCondition sc = new RoleSearchCondition();
         return searchPojo(sc);
     }
+
+    public List<Role> searchPojoByUserId(Integer userId){
+        return roleDao.searchPojoByUserId(userId);
+    }
 }
