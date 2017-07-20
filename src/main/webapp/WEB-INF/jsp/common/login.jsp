@@ -1,3 +1,4 @@
+<%@ page import="com.tc.ta.interfaces.http.SysStartupController" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -63,7 +64,7 @@
             success:function(result){
                 var re = JSON.parse(result);
                 if(re.returnCode=="0"){
-                    window.location.href="${path}/client/goto_main_page";
+                    window.location.href="${path}/<%=SysStartupController.URL_GOTO_INDEX_PAGE%>";
                 }else{
                     alert(re.msg);
                 }
