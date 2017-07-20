@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>客户管理系统</title>
+    <title>登录 | TA小助手</title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,17 +16,17 @@
         var path = "${path}";
     </script>
 
-    <link rel="stylesheet" type="text/css" href="${path}/css/login/bootstrap_3_3_6.css">
-    <link rel="stylesheet" type="text/css" href="${path}/css/login/htmleaf-demo.css">
-    <link rel="stylesheet" type="text/css" href="${path}/css/login/signin.css">
+    <link rel="stylesheet" href="/public/adminlte/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/public/htmleaf/htmleaf-demo.css">
+    <link rel="stylesheet" type="text/css" href="/css/login/login.css">
 </head>
 <body>
 <div class="htmleaf-container">
     <header class="htmleaf-header">
-        <h1>客户管理系统</h1>
+        <h1>TA小助手</h1>
     </header>
     <div class="signin">
-        <div class="signin-head"><img src="${path}/img/test/head_120.png" alt="" class="img-circle"></div>
+        <div class="signin-head"><img src="${path}/img/login/head_120.png" alt="" class="img-circle"></div>
         <form class="form-signin">
             <input id="txtUserName" type="text" class="form-control" placeholder="用户名" required autofocus value=""/>
             <input id="txtPassword" type="password" class="form-control" placeholder="密码" required value="" />
@@ -36,8 +36,8 @@
 </div>
 
 
-<script type="text/javascript" src="${path}/js/jquery.js"></script>
-<script type="text/javascript" src="${path}/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/public/jquery/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="/public/adminlte/bootstrap/js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
     function login(){
