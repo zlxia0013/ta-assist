@@ -16,6 +16,7 @@ public class SysStartupController extends BaseController {
 
     @RequestMapping(value = URL_GOTO_INDEX_PAGE)
     public String gotoIndexPage() {
+        getCurUser();
         return "common/login";
     }
 

@@ -1,7 +1,10 @@
 package com.tc.ta.common.web;
 
 
+import com.tc.ta.core.privilege.CheckPrivilegeResultEnum;
+import com.tc.ta.core.privilege.bo.PrivilegeBo;
 import com.tc.ta.core.user.pojo.User;
+import com.tc.ta.interfaces.http.SysLoginController;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -17,8 +20,8 @@ import javax.servlet.http.HttpServletResponse;
 public class CommonInterceptor extends HandlerInterceptorAdapter {
     protected Logger log = Logger.getLogger(this.getClass());
 
-//    @Autowired
-//    private AuthorityBo authorityBo;
+    @Autowired
+    private PrivilegeBo privilegeBo;
 
 	/*
      * 利用正则映射到需要拦截的路径
@@ -58,20 +61,22 @@ public class CommonInterceptor extends HandlerInterceptorAdapter {
 
         boolean rtn = true;
         //
-//        CheckAuthorityResultEnum result = authorityBo.checkAuthority(userInfo, url);
-//        switch (result) {
-//            case RETURN_TRUE:
-//                rtn = true;
-//                break;
-//            case NEED_LOGIN:
-//                request.getRequestDispatcher(CommonController.URL_GOTO_LOGIN_PAGE).forward(request, response);
-//                rtn = false;
-//                break;
-//            case NO_AUTHORITY:
+        CheckPrivilegeResultEnum result = privilegeBo.checkPrivilege(userInfo, url);
+        switch (result) {
+            case RETURN_TRUE:
+                rtn = true;
+                break;
+            case NEED_LOGIN:
+                response.sendRedirect(SysLoginController.URL_GOTO_LOGIN_PAGE);
+//                request.getRequestDispatcher(SysLoginController.URL_GOTO_LOGIN_PAGE).forward(request, response);
+                rtn = false;
+                break;
+            case NO_AUTHORITY:
+                response.sendRedirect("/error/no_access.html");
 //                request.getRequestDispatcher("/error/no_access.html").forward(request, response);
-//                rtn = false;
-//                break;
-//        }
+                rtn = false;
+                break;
+        }
 
         return rtn;
     }

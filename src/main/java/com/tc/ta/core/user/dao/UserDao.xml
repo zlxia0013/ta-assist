@@ -82,6 +82,7 @@
           <include refid="base_column_list" />
         FROM
           sys_user t
+        LIMIT #{firstRecord}, #{pageSize}
     </select>
 
     <select id="searchDto" parameterType="com.tc.ta.core.user.dto.UserSearchCondition" resultType="com.tc.ta.core.user.dto.UserDto">
@@ -89,6 +90,7 @@
           <include refid="base_column_list" />
         FROM
           sys_user t
+        LIMIT #{firstRecord}, #{pageSize}
     </select>
 
     <select id="searchCnt" parameterType="com.tc.ta.core.user.dto.UserSearchCondition" resultType="java.lang.Integer">

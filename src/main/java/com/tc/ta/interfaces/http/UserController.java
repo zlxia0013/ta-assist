@@ -8,7 +8,7 @@ import com.tc.ta.core.user.dto.UserDto;
 import com.tc.ta.core.user.dto.UserMainPageModel;
 import com.tc.ta.core.user.dto.UserSearchCondition;
 import com.tc.ta.core.user.pojo.User;
-import com.tc.ta.util.ReturnCodes;
+import com.tc.ta.common.web.ReturnCodes;
 import com.tc.ta.util.exception.ComRuntimeException;
 import com.tc.ta.util.exception.ComSystemException;
 import com.tc.ta.util.framework.BaseController;

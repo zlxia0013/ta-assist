@@ -1,7 +1,7 @@
 package com.tc.ta.util.exception;
 
 
-import com.tc.ta.util.ReturnCodes;
+import com.tc.ta.common.web.ReturnCodes;
 
 public class ComException extends Exception {
 	private static final long	serialVersionUID	= 8589455703229910144L;

@@ -1,4 +1,4 @@
-package com.tc.ta.util;
+package com.tc.ta.common.web;
 
 public class ReturnCodes {
 	public static int	SUCCESS				= 0;

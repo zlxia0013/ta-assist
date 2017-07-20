@@ -1,11 +1,16 @@
 package com.tc.ta.core.user.pojo;
 
 
+import com.tc.ta.core.role.RoleEnum;
+import com.tc.ta.core.role.pojo.Role;
+import com.tc.ta.core.user.SuperUserName;
 import com.tc.ta.util.framework.BaseSearchCondition;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
-public class User extends BaseSearchCondition{
+public class User extends BaseSearchCondition {
     private Integer id;
 
     private Integer verNbr;
@@ -26,9 +31,29 @@ public class User extends BaseSearchCondition{
 
     private String remark;
 
-    // %%ONLY_FOR_INS_FLD%FI_JAVA_ENTITY_DECLARE%%
+    //=================================
+    private List<Role> roleList = new ArrayList<Role>();
+
 
     public User() {
+    }
+
+    public boolean isSuperAdmin() {
+        return SuperUserName.ADMIN.equals(name);
+    }
+
+    public boolean isAdmin() {
+        if (isSuperAdmin()) {
+            return true;
+        }
+
+        for (Role role : roleList) {
+            if (RoleEnum.isAdmin(role.getCode())) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public Integer getId() {
@@ -110,5 +135,12 @@ public class User extends BaseSearchCondition{
     public void setRemark(String remark) {
         this.remark = remark;
     }
-    // %%ONLY_FOR_INS_FLD%FI_JAVA_ENTITY_GET_SET%%
+
+    public List<Role> getRoleList() {
+        return roleList;
+    }
+
+    public void setRoleList(List<Role> roleList) {
+        this.roleList = roleList;
+    }
 }

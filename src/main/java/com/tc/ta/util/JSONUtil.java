@@ -4,6 +4,7 @@ package com.tc.ta.util;
  * java内置转换为json时，简单类型的问题。
  */
 
+import com.tc.ta.util.exception.ComRuntimeException;
 import org.apache.log4j.Logger;
 
 import java.lang.reflect.Field;
@@ -156,7 +157,7 @@ public class JSONUtil {
 		 * 判断数组为map or list
 		 */
 		if (obj instanceof Collection == false && obj instanceof Map == false)
-			throw new JsonException("ERROR:CAN NOT Stringfy a null Object TO JSON STRING");
+			throw new ComRuntimeException("ERROR:CAN NOT Stringfy a null Object TO JSON STRING");
 
 		StringBuilder sb = new StringBuilder();
 		if (obj instanceof List) {
@@ -188,14 +189,14 @@ public class JSONUtil {
 	 * 简单类型转为json,未完
 	 * 
 	 * @return "name":"xcj"或者"age":23格式的字符串
-	 * @throws JsonException
+	 * @throws ComRuntimeException
 	 */
-	private String SimpleDatatoJsonString(Object obj) throws JsonException {
+	private String SimpleDatatoJsonString(Object obj) throws ComRuntimeException {
 		log.info("SimpleDatatoJsonString start");
 		Class c = obj.getClass();
 		if (!c.isPrimitive())// 枚举判定
 		{
-			throw new JsonException("非基础类型");
+			throw new ComRuntimeException("非基础类型");
 		}
 		String name = obj.getClass().getName();
 		if (obj instanceof Number) {
@@ -214,10 +215,10 @@ public class JSONUtil {
 	/**
 	 * json转换为指定JavaBean
 	 * 
-	 * @throws JsonException
+	 * @throws ComRuntimeException
 	 * @description 不能转换为抽象类或接口。
 	 */
-	public static <T> T jsonToBean(String js, Class<T> beanClass) throws JsonException {
+	public static <T> T jsonToBean(String js, Class<T> beanClass) throws ComRuntimeException {
 		log.info("jsonToBean start");
 		/*
 		 * 步骤： 创建对象,并获取其所有属性数组fields和公开方法数组methods。 解析key,遍历fields获取等于key的Field 获取field的声明类型。进一步获取该属性的set方法Method 解析获得value,根据value的不同类型进行实例化,分为集合,数值,字符串,对象四种。
@@ -262,7 +263,7 @@ public class JSONUtil {
 				}
 
 				if (isFieldChanged == false)
-					throw new JsonException("JSON结构错误," + beanClass.getName() + "无法找到匹配key:" + keystring);
+					throw new ComRuntimeException("JSON结构错误," + beanClass.getName() + "无法找到匹配key:" + keystring);
 				lindex = rindex = rindex + 2;
 
 				/* 匹配值value */
@@ -322,10 +323,10 @@ public class JSONUtil {
 				rindex += 3;
 			}
 			return returnobj;
-		} catch (JsonException e) {
+		} catch (ComRuntimeException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
-			// JsonException ep=new JsonException("反射构造JavaBean失败");
+			// ComRuntimeException ep=new ComRuntimeException("反射构造JavaBean失败");
 			// ep.setStackTrace(e.getStackTrace());
 			// throw ep;
 			e.printStackTrace();
@@ -344,25 +345,25 @@ public class JSONUtil {
 	 *            ，需为Set,List的具体类，抽象类或接口，将抛出JSONException itemClass数组元素的类型，null或接口将抛出JSONException
 	 * 
 	 * example：//build jsonstring List phonelist=JSONUtil.jsonToBeanlist(jsonstring,ArrayList.class);
-	 * @throws JsonException
+	 * @throws ComRuntimeException
 	 * @throws IllegalAccessException
 	 * @throws InstantiationException
 	 */
-	public static <T> Object jsonToBeanList(String js, Class<T> beanClass, Class itemClass) throws JsonException, InstantiationException,
+	public static <T> Object jsonToBeanList(String js, Class<T> beanClass, Class itemClass) throws ComRuntimeException, InstantiationException,
 			IllegalAccessException {
 		log.info("jsonToBeanList start");
 		// 判断是否符合转换格式强求
 		if ((beanClass.isInterface() && !beanClass.getSimpleName().equals("Set") && !beanClass.getSimpleName().equals("List")) || beanClass == null) {
-			throw new JsonException("args beanClass can not be null or interface");
+			throw new ComRuntimeException("args beanClass can not be null or interface");
 		}
 		if (itemClass.isInterface() || itemClass == null) {
 			if (itemClass == null)
 				return js;// 由于泛型的使用，在过程中，没法事先定下list元素的类型，如果是在json中含有[]，此处itemClass将为空
-			throw new JsonException("args itemClass can not be null or interface");
+			throw new ComRuntimeException("args itemClass can not be null or interface");
 		}
 		// 并非来自Set和List的具体类
 		if (!beanClass.isAssignableFrom(Set.class) && !beanClass.isAssignableFrom(List.class))
-			throw new JsonException("only support parse to Class implements Collection");
+			throw new ComRuntimeException("only support parse to Class implements Collection");
 
 		Collection coll;
 		if (beanClass.getSimpleName().equals("Set"))
@@ -407,12 +408,12 @@ public class JSONUtil {
 	/**
 	 * javaBean to Json串
 	 * 
-	 * @throws JsonException
+	 * @throws ComRuntimeException
 	 * @throws IllegalAccessException
 	 * @throws IllegalArgumentException
 	 * @params 解析对象，只能为具体类
 	 */
-	public static String beanToJson(Object obj) throws JsonException, IllegalArgumentException, IllegalAccessException {
+	public static String beanToJson(Object obj) throws ComRuntimeException, IllegalArgumentException, IllegalAccessException {
 		log.info("beanToJson start" + obj.getClass().getSimpleName());
 		if (obj == null)
 			return "";
@@ -497,10 +498,10 @@ public class JSONUtil {
 	public static String simpleObjectJSON(String key, Object item) {
 		try {
 			if (key == null || item == null)
-				throw new JsonException("转换key:" + key + ",对象:" + item + ",key 或value 为空");
+				throw new ComRuntimeException("转换key:" + key + ",对象:" + item + ",key 或value 为空");
 			if (!SimpleClass.isSimpleClass(item.getClass()))
-				throw new JsonException("转换的对象必须为基础类型");
-		} catch (JsonException e) {
+				throw new ComRuntimeException("转换的对象必须为基础类型");
+		} catch (ComRuntimeException e) {
 			e.printStackTrace();
 		}
 		String classname = item.getClass().getSimpleName();

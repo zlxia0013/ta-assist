@@ -1,7 +1,7 @@
 package com.tc.ta.util.framework;
 
+import com.tc.ta.common.web.CommonKeys;
 import com.tc.ta.core.user.pojo.User;
-import com.tc.ta.util.JzbKeys;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -26,7 +26,7 @@ public class BaseController {
 	}
 
 	public User getCurUser() {
-		return (User) getSession().getAttribute(JzbKeys.S_KEY_USER);
+		return (User) getSession().getAttribute(CommonKeys.SESSION_USER);
 	}
 
 	public Integer getCurUserId() {

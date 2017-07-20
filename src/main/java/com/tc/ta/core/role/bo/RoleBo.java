@@ -49,5 +49,10 @@ public class RoleBo {
 		return roleDao.searchCnt(sc);
     }
 
-		//======================================= new method create here ====================================/
+    //======================================= new method create here ====================================/
+
+    public List<Role> searchAllRoles() {
+        RoleSearchCondition sc = new RoleSearchCondition();
+        return searchPojo(sc);
+    }
 }

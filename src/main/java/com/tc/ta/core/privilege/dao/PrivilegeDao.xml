@@ -64,7 +64,11 @@
 		<include refid="base_column_list" />
 		FROM
 			sys_privilege t
-		WHERE 1=1
+		<where>
+			<if test="noLimitAccess != null">
+				no_limit_access = #{noLimitAccess}
+			</if>
+		</where>
 	</select>
 	
 	<select id="searchDto" parameterType="com.tc.ta.core.privilege.dto.PrivilegeSearchCondition" resultType="com.tc.ta.core.privilege.pojo.Privilege">
@@ -85,6 +89,17 @@
         FROM
         	sys_privilege t
 	</select>
-	
-	<!--%%NPT%DB_METHOD_INSERT%%-->
+
+	<!--//======================================= new method create here ====================================/-->
+
+	<select id="searchPojoByRoleCode" parameterType="String" resultType="com.tc.ta.core.privilege.pojo.Privilege">
+		SELECT
+			<include refid="base_column_list" />
+		FROM
+			sys_privilege t, sys_role_privilege srp
+		WHERE
+			t.code = srp.privilege_code
+		 	AND srp.role_code = #{roleCode}
+	</select>
+
 </mapper>
