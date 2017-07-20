@@ -1,7 +1,6 @@
 package com.tc.ta.core.user.bo;
 
 
-import com.tc.ta.core.user.RoleEnum;
 import com.tc.ta.core.user.SuperUserName;
 import com.tc.ta.core.user.UserStateEnum;
 import com.tc.ta.core.user.dao.UserDao;
@@ -12,9 +11,7 @@ import com.tc.ta.util.StringUtil;
 import com.tc.ta.util.exception.ComRuntimeException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.tc.ta.util.exception.ComRuntimeException;
 
-import java.util.Date;
 import java.util.List;
 
 

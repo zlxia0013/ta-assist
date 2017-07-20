@@ -1,4 +1,4 @@
-package com.tc.ta.core.user;
+package com.tc.ta.core.role;
 
 /**
  * Created by Jack on 2017/3/4.
