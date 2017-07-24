@@ -1,220 +1,165 @@
-<%@ page import="com.jack.doormis.core.user.UserStateEnum" %>
-<%@ page import="com.jack.doormis.core.user.pojo.User" %>
-<%@ page import="com.jack.doormis.common.web.JspKeys" %>
-<%@ page import="com.jack.doormis.core.user.RoleEnum" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page import="com.tc.ta.core.user.pojo.User" %>
+<%@ page import="com.tc.ta.common.web.JspKeys" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<!--
+This is a starter template page. Use this page to start your new project from
+scratch. This page gets rid of all links and provides the needed markup only.
+-->
+<html>
 <head>
     <meta charset="utf-8">
-    <title>新增用户</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>AdminLTE 2 | Starter</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
     <%
         String path = request.getContextPath();
-        path = "/".equals(path) ? "" : path;
+        path = "/".equals(path)?"":path;
         request.setAttribute("path", path);
     %>
     <script type="text/javascript">
         var path = "${path}";
     </script>
 
-    <link rel="stylesheet" type="text/css" href="${path}/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="${path}/css/bootstrap-responsive.css">
-    <link rel="stylesheet" type="text/css" href="${path}/css/site.css">
+    <!-- Bootstrap 3.3.6 -->
+    <link rel="stylesheet" href="${path}/public/adminlte/bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="${path}/public/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="${path}/public/ionicons/ionicons.min.css">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="${path}/public/adminlte/plugins/datatables/dataTables.bootstrap.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="${path}/public/adminlte/dist/css/AdminLTE.min.css">
+    <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
+          page. However, you can choose any other skin. Make sure you
+          apply the skin class to the body tag so the changes take effect.
+    -->
+    <link rel="stylesheet" href="${path}/public/adminlte/dist/css/skins/_all-skins.min.css">
 
+    <link rel="stylesheet" href="${path}/css/common.css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body>
-<div class="navbar navbar-fixed-top">
-    <div class="navbar-inner">
-        <div class="container-fluid">
-            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </a>
-            <a class="brand" href="#">${sessionUserInfo.userName}-${sessionUserInfo.role}-${sessionUserInfo.realName}</a>
-        </div>
-    </div>
-</div>
+<!--
+BODY TAG OPTIONS:
+=================
+Apply one or more of the following classes to get the
+desired effect
+|---------------------------------------------------------|
+| SKINS         | skin-blue                               |
+|               | skin-black                              |
+|               | skin-purple                             |
+|               | skin-yellow                             |
+|               | skin-red                                |
+|               | skin-green                              |
+|---------------------------------------------------------|
+|LAYOUT OPTIONS | fixed                                   |
+|               | layout-boxed                            |
+|               | layout-top-nav                          |
+|               | sidebar-collapse                        |
+|               | sidebar-mini                            |
+|---------------------------------------------------------|
+-->
+<body >
+<div class="container">
 
-<%
-    User sessionUserInfo = (User) request.getAttribute(JspKeys.JspParam_SessionUserInfo);
-%>
-
-<div class="container-fluid">
-    <div class="row-fluid">
-        <div class="span3">
-            <div class="well sidebar-nav">
-                <ul class="nav nav-list">
-                    <li class="nav-header"><i class="icon-wrench"></i> Administration</li>
-                    <li><a href="${path}/client/goto_main_page">客户管理</a></li>
-
-                    <%
-                        if(RoleEnum.ADMIN.toString().equals(sessionUserInfo.getRole()))
-                        {
-
-                    %>
-                    <li><a href="${path}/user/goto_main_page">用户管理</a></li>
-                    <%
-                        }
-                    %>
-
-                    <li class="nav-header"><i class="icon-user"></i> Profile</li>
-                    <li><a href="${path}/user/goto_update_pwd_page">修改密码</a></li>
-                    <li><a href="${path}/logout">退出</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="span9">
-            <div class="row-fluid">
-                <div class="page-header">
-                    <h1>新增用户</h1>
+    <div class="box box-primary">
+        <!-- /.box-header -->
+        <div class="box-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="txtUserName">用户名</label>
+                        <input type="email" class="form-control" id="txtUserName" placeholder="用户名">
+                    </div>
                 </div>
-                <form class="form-horizontal">
-                    <fieldset>
-                        <div class="control-group">
-                            <label class="control-label" for="userName">用户名</label>
-                            <div class="controls">
-                                <input type="text" class="input-xlarge" id="userName"/>
-                            </div>
-                        </div>
-                        <div class="control-group">
-                            <label class="control-label" for="realName">姓名</label>
-                            <div class="controls">
-                                <input type="text" class="input-xlarge" id="realName"/>
-                            </div>
-                        </div>
-                        <div class="control-group">
-                            <label class="control-label" for="pwd">密码</label>
-                            <div class="controls">
-                                <input type="text" class="input-xlarge" id="pwd"/>
-                            </div>
-                        </div>
-
-                        <div class="control-group">
-                            <label class="control-label" for="role">角色</label>
-                            <div class="controls">
-                                <select id="role">
-                                    <option value="EMPL">操作员</option>
-                                    <option value="ADMIN">管理员</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="control-group">
-                            <label class="control-label" for="phone">电话</label>
-                            <div class="controls">
-                                <input type="text" class="input-xlarge" id="phone"/>
-                            </div>
-                        </div>
-
-                        <div class="control-group">
-                            <label class="control-label" for="stateId">帐户可用</label>
-                            <div class="controls">
-                                <input type="checkbox" id="stateId" checked/>
-                            </div>
-                        </div>
-
-                        <div class="control-group">
-                            <label class="control-label" for="remark">备注</label>
-                            <div class="controls">
-                                <input type="text" class="input-xlarge" id="remark"/>
-                            </div>
-                        </div>
-                        <div class="form-actions">
-                            <input type="button" class="btn btn-success btn-large"  onclick="add()" value="保  存"/>
-                            <a class="btn" href="${path}/user/goto_main_page">Cancel</a>
-                        </div>
-                    </fieldset>
-                </form>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="txtFullName">密码</label>
+                        <input type="password" class="form-control" id="txtPwd" placeholder="密码">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="txtFullName">确认密码</label>
+                        <input type="password" class="form-control" id="txtPwdConfirm" placeholder="再次输入密码">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="txtFullName">姓名</label>
+                        <input type="password" class="form-control" id="txtFullName" placeholder="用户姓名">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="txtFullName">电话</label>
+                        <input type="password" class="form-control" id="txtPhone" placeholder="电话">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="txtFullName">状态</label>
+                        <input type="password" class="form-control" id="txtState" placeholder="电话">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <button type="submit" class="btn btn-primary">保 存</button>
+                </div>
             </div>
         </div>
     </div>
-
-    <hr>
-
-    <footer class="well">
-        &copy; 客户管理系统
-    </footer>
-
+    <!-- /.box -->
 </div>
 
-<script type="text/javascript" src="${path}/js/jquery.js"></script>
-<script type="text/javascript" src="${path}/js/bootstrap.min.js"></script>
+<!-- ./wrapper -->
 
-<script type="text/javascript">
-    function add(){
-        var userName = $.trim($("#userName").val());
-        if(userName == ""){
-            alert("请输入用户名");
-            return;
-        }
+<!-- REQUIRED JS SCRIPTS -->
 
-        var realName = $.trim($("#realName").val());
-        if(realName == ""){
-            alert("请输入姓名");
-            return;
-        }
+<!-- jQuery 2.2.3 -->
+<script src="${path}/public/adminlte/plugins/jQuery/jquery-2.2.3.min.js"></script>
+<!-- Bootstrap 3.3.6 -->
+<script src="${path}/public/adminlte/bootstrap/js/bootstrap.min.js"></script>
+<!-- DataTables -->
+<script src="${path}/public/adminlte/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="${path}/public/adminlte/plugins/datatables/dataTables.bootstrap.min.js"></script>
+<!-- SlimScroll -->
+<script src="${path}/public/adminlte/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+<!-- FastClick -->
+<script src="${path}/public/adminlte/plugins/fastclick/fastclick.js"></script>
+<!-- AdminLTE App -->
+<script src="${path}/public/adminlte/dist/js/app.min.js"></script>
 
-        var pwd = $.trim($("#pwd").val());
-        if(pwd == ""){
-            alert("请输入密码");
-            return;
-        }
+<!-- Optionally, you can add Slimscroll and FastClick plugins.
+     Both of these plugins are recommended to enhance the
+     user experience. Slimscroll is required when using the
+     fixed layout. -->
+<!-- page script -->
+<script>
+    $(function () {
 
-        var role = $.trim($("#role").val());
-        if(role == ""){
-            alert("请选择角色");
-            return;
-        }
 
-        var phone = $.trim($("#phone").val());
-        if(phone == ""){
-            alert("请输入电话");
-            return;
-        }
-
-        var stateId;
-        if($('#stateId').is(':checked')){
-            stateId = <%=UserStateEnum.ENABLED.getStateId()%>;
-        } else {
-            stateId = <%=UserStateEnum.DISABLED.getStateId()%>;
-        }
-
-        var remark = $.trim($("#remark").val());
-
-        $.ajax({
-            url:"${path}/user/add",
-            type:"post",
-            data:{
-                userName:userName,
-                realName:realName,
-                pwd:pwd,
-                role:role,
-                phone:phone,
-                stateId:stateId,
-                remark:remark
-            },
-            success:function(result){
-                var re = JSON.parse(result);
-                if(re.returnCode=="0"){
-                    window.location.href="${path}/user/goto_main_page";
-                }else{
-                    alert(re.msg);
-                }
-            },
-            error:function(request) {      // 设置表单提交出错
-                alert(request);  //登录错误提示信息
-            }
-        });
-
-        return false;
-    }
+    });
 </script>
-
 </body>
 </html>

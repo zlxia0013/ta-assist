@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tc.ta.core.fundbaseinfo.dao.FundBaseInfoDao">
+	<sql id="base_column_list" >
+		 t.fund_code as fundCode,
+		 t.fund_name as fundName,
+		 t.fund_english_name as fundEnglishName,
+		 t.fund_class as fundClass,
+		 t.fund_type as fundType,
+		 t.share_class as shareClass,
+		 t.currency_type as currencyType,
+		 t.fund_manager_code as fundManagerCode,
+		 t.custodian_code as custodianCode,
+		 t.fa_code as faCode,
+		 t.manager_fee_rate as managerFeeRate,
+		 t.specification as specification,
+		 t.fund_status as fundStatus,
+		 t.is_guaranteed_fund as isGuaranteedFund,
+		 t.is_structured_fund as isStructuredFund,
+		 t.is_multi_fund as isMultiFund,
+		 t.is_qdii_fund as isQdiiFund,
+		 t.is_etf_fund as isEtfFund,
+		 t.is_lof as isLof,
+		 t.ta_code as taCode,
+		 t.is_sync as isSync,
+		 t.ref_fund as refFund
+	</sql>
+	
+	<select id="getById" parameterType="Integer" resultType="com.tc.ta.core.fundbaseinfo.pojo.FundBaseInfo">
+		SELECT
+			<include refid="base_column_list" />
+		FROM
+			fund_base_info t
+		WHERE
+			t.id = #{id}
+	</select>
+	
+	<insert id="add" parameterType="com.tc.ta.core.fundbaseinfo.pojo.FundBaseInfo" >
+		INSERT INTO 
+			fund_base_info
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+				<if test="fundCode!= null">fund_code,</if>
+				<if test="fundName!= null">fund_name,</if>
+				<if test="fundEnglishName!= null">fund_english_name,</if>
+				<if test="fundClass!= null">fund_class,</if>
+				<if test="fundType!= null">fund_type,</if>
+				<if test="shareClass!= null">share_class,</if>
+				<if test="currencyType!= null">currency_type,</if>
+				<if test="fundManagerCode!= null">fund_manager_code,</if>
+				<if test="custodianCode!= null">custodian_code,</if>
+				<if test="faCode!= null">fa_code,</if>
+				<if test="managerFeeRate!= null">manager_fee_rate,</if>
+				<if test="specification!= null">specification,</if>
+				<if test="fundStatus!= null">fund_status,</if>
+				<if test="isGuaranteedFund!= null">is_guaranteed_fund,</if>
+				<if test="isStructuredFund!= null">is_structured_fund,</if>
+				<if test="isMultiFund!= null">is_multi_fund,</if>
+				<if test="isQdiiFund!= null">is_qdii_fund,</if>
+				<if test="isEtfFund!= null">is_etf_fund,</if>
+				<if test="isLof!= null">is_lof,</if>
+				<if test="taCode!= null">ta_code,</if>
+				<if test="isSync!= null">is_sync,</if>
+				<if test="refFund!= null">ref_fund,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides="," >
+	          	<if test="fundCode != null" >#{fundCode},</if>
+	          	<if test="fundName != null" >#{fundName},</if>
+	          	<if test="fundEnglishName != null" >#{fundEnglishName},</if>
+	          	<if test="fundClass != null" >#{fundClass},</if>
+	          	<if test="fundType != null" >#{fundType},</if>
+	          	<if test="shareClass != null" >#{shareClass},</if>
+	          	<if test="currencyType != null" >#{currencyType},</if>
+	          	<if test="fundManagerCode != null" >#{fundManagerCode},</if>
+	          	<if test="custodianCode != null" >#{custodianCode},</if>
+	          	<if test="faCode != null" >#{faCode},</if>
+	          	<if test="managerFeeRate != null" >#{managerFeeRate},</if>
+	          	<if test="specification != null" >#{specification},</if>
+	          	<if test="fundStatus != null" >#{fundStatus},</if>
+	          	<if test="isGuaranteedFund != null" >#{isGuaranteedFund},</if>
+	          	<if test="isStructuredFund != null" >#{isStructuredFund},</if>
+	          	<if test="isMultiFund != null" >#{isMultiFund},</if>
+	          	<if test="isQdiiFund != null" >#{isQdiiFund},</if>
+	          	<if test="isEtfFund != null" >#{isEtfFund},</if>
+	          	<if test="isLof != null" >#{isLof},</if>
+	          	<if test="taCode != null" >#{taCode},</if>
+	          	<if test="isSync != null" >#{isSync},</if>
+	          	<if test="refFund != null" >#{refFund},</if>
+		</trim>
+	</insert>
+	
+	<update id="update" parameterType="com.tc.ta.core.fundbaseinfo.pojo.FundBaseInfo" >
+	   	UPDATE
+	 		fund_base_info
+        <set>
+	        <if test="fundCode!= null" >fund_code = #{fundCode},</if>
+	        <if test="fundName!= null" >fund_name = #{fundName},</if>
+	        <if test="fundEnglishName!= null" >fund_english_name = #{fundEnglishName},</if>
+	        <if test="fundClass!= null" >fund_class = #{fundClass},</if>
+	        <if test="fundType!= null" >fund_type = #{fundType},</if>
+	        <if test="shareClass!= null" >share_class = #{shareClass},</if>
+	        <if test="currencyType!= null" >currency_type = #{currencyType},</if>
+	        <if test="fundManagerCode!= null" >fund_manager_code = #{fundManagerCode},</if>
+	        <if test="custodianCode!= null" >custodian_code = #{custodianCode},</if>
+	        <if test="faCode!= null" >fa_code = #{faCode},</if>
+	        <if test="managerFeeRate!= null" >manager_fee_rate = #{managerFeeRate},</if>
+	        <if test="specification!= null" >specification = #{specification},</if>
+	        <if test="fundStatus!= null" >fund_status = #{fundStatus},</if>
+	        <if test="isGuaranteedFund!= null" >is_guaranteed_fund = #{isGuaranteedFund},</if>
+	        <if test="isStructuredFund!= null" >is_structured_fund = #{isStructuredFund},</if>
+	        <if test="isMultiFund!= null" >is_multi_fund = #{isMultiFund},</if>
+	        <if test="isQdiiFund!= null" >is_qdii_fund = #{isQdiiFund},</if>
+	        <if test="isEtfFund!= null" >is_etf_fund = #{isEtfFund},</if>
+	        <if test="isLof!= null" >is_lof = #{isLof},</if>
+	        <if test="taCode!= null" >ta_code = #{taCode},</if>
+	        <if test="isSync!= null" >is_sync = #{isSync},</if>
+	        <if test="refFund!= null" >ref_fund = #{refFund},</if>
+		</set>
+	   	WHERE
+			id = #{id}
+	</update>
+	
+	<delete id="delete" parameterType="Long">
+	    DELETE FROM 
+			fund_base_info
+	    WHERE 
+        	id = #{id}
+	</delete>
+	
+	<select id="searchPojo" parameterType="com.tc.ta.core.fundbaseinfo.dto.FundBaseInfoSearchCondition" resultType="com.tc.ta.core.fundbaseinfo.pojo.FundBaseInfo">
+		SELECT
+			<include refid="base_column_list" />
+		FROM
+			fund_base_info t
+		LIMIT #{firstRecord}, #{pageSize}
+	</select>
+	
+	<select id="searchDto" parameterType="com.tc.ta.core.fundbaseinfo.dto.FundBaseInfoSearchCondition" resultType="com.tc.ta.core.fundbaseinfo.pojo.FundBaseInfo">
+	    SELECT
+	         t.fund_code as fundCode,
+	         t.fund_name as fundName,
+	         t.fund_english_name as fundEnglishName,
+	         t.fund_class as fundClass,
+	         t.fund_type as fundType,
+	         t.share_class as shareClass,
+	         t.currency_type as currencyType,
+	         t.fund_manager_code as fundManagerCode,
+	         t.custodian_code as custodianCode,
+	         t.fa_code as faCode,
+	         t.manager_fee_rate as managerFeeRate,
+	         t.specification as specification,
+	         t.fund_status as fundStatus,
+	         t.is_guaranteed_fund as isGuaranteedFund,
+	         t.is_structured_fund as isStructuredFund,
+	         t.is_multi_fund as isMultiFund,
+	         t.is_qdii_fund as isQdiiFund,
+	         t.is_etf_fund as isEtfFund,
+	         t.is_lof as isLof,
+	         t.ta_code as taCode,
+	         t.is_sync as isSync,
+	         t.ref_fund as refFund
+	    FROM 
+			fund_base_info a
+		LIMIT #{firstRecord}, #{pageSize}
+	</select>
+	
+	<select id="searchCnt" parameterType="com.tc.ta.core.fundbaseinfo.dto.FundBaseInfoSearchCondition" resultType="Integer">
+        SELECT
+        	count(*)
+        FROM
+        	fund_base_info t
+	</select>
+
+	<!--//======================================= new method create here ====================================/-->
+</mapper>

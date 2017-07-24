@@ -17,12 +17,13 @@ public class SysStartupController extends BaseController {
 
     @RequestMapping(value = URL_GOTO_INDEX_PAGE)
     public String gotoIndexPage() {
-        User userInfo = getCurUser();
-        if (userInfo.isAdmin()) {
-            return "redirect:" + UserController.URL_GOTO_MAIN_PAGE;
-        } else {
-            return "common/login";
-        }
+        return "common/index";
+//        User userInfo = getCurUser();
+//        if (userInfo.isAdmin()) {
+//            return "redirect:" + UserController.URL_GOTO_MAIN_PAGE;
+//        } else {
+//            return "common/login";
+//        }
     }
 
 
