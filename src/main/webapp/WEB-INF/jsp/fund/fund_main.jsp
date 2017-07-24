@@ -1,3 +1,5 @@
+<%@ page import="com.tc.ta.interfaces.http.FundController" %>
+<%@ page import="java.util.Random" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <!--
@@ -8,7 +10,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminLTE 2 | Starter</title>
+    <title>积金管理</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
@@ -69,68 +71,78 @@ desired effect
 <body >
 <div class="container">
 
-    <div class="box box-primary">
-        <!-- /.box-header -->
-        <div class="box-body">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label for="txtUserName">用户名</label>
-                        <input type="email" class="form-control" id="txtUserName" placeholder="用户名">
+            <div class="box box-primary">
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="txtFundCode">基金代码</label>
+                                <input type="text" class="form-control" id="txtFundCode">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="txtFundName">基金名称</label>
+                                <input type="text" class="form-control" id="txtFundName">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="txtEnglishName">基金英文名</label>
+                                <input type="text" class="form-control" id="txtEnglishName">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button type="submit" class="btn btn-primary">搜 索</button>
+                            <button type="submit" id="btnAdd" class="btn btn-primary pull-right ">新增基金</button>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label for="txtFullName">密码</label>
-                        <input type="password" class="form-control" id="txtPwd" placeholder="密码">
-                    </div>
+            <!-- /.box -->
+            <div class="box box-primary">
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <table id="dg" class="table table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>基金代码</th>
+                            <th>基金名称</th>
+                            <th>基金英文名</th>
+                            <th>管理人</th>
+                            <th>托管人</th>
+                            <th>基金状态</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>dsfasfadsfsafasfd</td>
+                            <td>Netscape Browser 8</td>
+                            <td>Win 98SE+</td>
+                            <td>1.7</td>
+                            <td>A</td>
+                            <td>A</td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
+                <!-- /.box-body -->
             </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label for="txtFullName">确认密码</label>
-                        <input type="password" class="form-control" id="txtPwdConfirm" placeholder="再次输入密码">
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label for="txtFullName">姓名</label>
-                        <input type="password" class="form-control" id="txtFullName" placeholder="用户姓名">
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label for="txtFullName">电话</label>
-                        <input type="password" class="form-control" id="txtPhone" placeholder="电话">
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label for="txtFullName">状态</label>
-                        <input type="password" class="form-control" id="txtState" placeholder="电话">
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <button type="submit" class="btn btn-primary">保 存</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- /.box -->
 </div>
 
 <!-- ./wrapper -->
+
+<div class="modal fade" id="modelContainer" role="basic" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        </div>
+    </div>
+</div>
 
 <!-- REQUIRED JS SCRIPTS -->
 
@@ -155,8 +167,19 @@ desired effect
 <!-- page script -->
 <script>
     $(function () {
+        $('#dg').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false
+        });
 
 
+        $("#btnAdd").click(function () {
+            parent.addTab({title: "新增基金", url:"${path}<%=FundController.URL_GOTO_ADD_PAGE%>", id: <%=new Random().nextInt()%>, close: true, single:true});
+        });
     });
 </script>
 </body>

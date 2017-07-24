@@ -1,7 +1,6 @@
-<%@ page import="com.tc.ta.core.user.pojo.User" %>
-<%@ page import="com.tc.ta.common.web.JspKeys" %>
-<%@ page import="com.tc.ta.interfaces.http.UserController" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+ <%@ page import="com.tc.ta.interfaces.http.UserController" %>
+ <%@ page import="java.util.Random" %>
+ <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <!--
 This is a starter template page. Use this page to start your new project from
@@ -79,13 +78,13 @@ desired effect
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="txtUserName">用户名</label>
-                                <input type="email" class="form-control" id="txtUserName" placeholder="输入用户名">
+                                <input type="email" class="form-control" id="txtUserName">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="txtFullName">姓名</label>
-                                <input type="password" class="form-control" id="txtFullName" placeholder="输入用户姓名">
+                                <input type="password" class="form-control" id="txtFullName">
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -112,7 +111,6 @@ desired effect
                             <th>姓名</th>
                             <th>电话</th>
                             <th>状态</th>
-                            <th>添加时间</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -121,7 +119,6 @@ desired effect
                             <td>Netscape Browser 8</td>
                             <td>Win 98SE+</td>
                             <td>1.7</td>
-                            <td>A</td>
                             <td>A</td>
                             <td>A</td>
                         </tr>
@@ -175,7 +172,7 @@ desired effect
 
 
         $("#btnAddUser").click(function () {
-            parent.addTab({id: 4, title: "新增用户", url:"${path}<%=UserController.URL_GOTO_ADD_PAGE%>", close: true, single:true});
+            parent.addTab({title: "新增用户", url:"${path}<%=UserController.URL_GOTO_ADD_PAGE%>", id: <%=new Random().nextInt()%>, close: true, single:true});
         });
     });
 </script>

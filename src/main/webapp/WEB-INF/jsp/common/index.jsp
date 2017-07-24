@@ -1,6 +1,6 @@
-<%@ page import="com.tc.ta.core.user.pojo.User" %>
-<%@ page import="com.tc.ta.common.web.JspKeys" %>
 <%@ page import="com.tc.ta.interfaces.http.UserController" %>
+<%@ page import="com.tc.ta.interfaces.http.FundController" %>
+<%@ page import="java.util.Random" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <!--
@@ -11,7 +11,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminLTE 2 | Starter</title>
+    <title>TA小助手</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
@@ -473,15 +473,15 @@ desired effect
         });
 
         $("#menuFundBaseInfo").click(function () {
-            addTab({id: 1, title: "基金管理", close: true});
+            addTab({title: "基金管理", url:"${path}<%=FundController.URL_GOTO_MAIN_PAGE%>", id: <%=new Random().nextInt()%>, close: true});
         });
 
         $("#menuDistributor").click(function () {
-            addTab({id: 2, title: "销售商管理", close: true});
+            addTab({title: "销售商管理", id: <%=new Random().nextInt()%>, close: true});
         });
 
         $("#menuUser").click(function () {
-            addTab({id: 3, title: "用户管理", url:"${path}<%=UserController.URL_GOTO_MAIN_PAGE%>", close: true, single:true});
+            addTab({title: "用户管理", url:"${path}<%=UserController.URL_GOTO_MAIN_PAGE%>", id: <%=new Random().nextInt()%>, close: true, single:true});
         });
 
 

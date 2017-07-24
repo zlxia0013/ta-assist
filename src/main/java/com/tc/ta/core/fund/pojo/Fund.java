@@ -1,9 +1,9 @@
-package com.tc.ta.core.fundbaseinfo.pojo;
+package com.tc.ta.core.fund.pojo;
 
 import java.util.Date;
 import com.tc.ta.util.framework.BaseSearchCondition;
 
-public class FundBaseInfo  extends BaseSearchCondition{
+public class Fund  extends BaseSearchCondition{
 	private String fundCode;
 
 	private String fundName;
@@ -47,10 +47,14 @@ public class FundBaseInfo  extends BaseSearchCondition{
 	private String isSync;
 
 	private String refFund;
+
+	private Integer addUserId;
+
+	private Date addTime;
 	
 	// %%ONLY_FOR_INS_FLD%FI_JAVA_ENTITY_DECLARE%%
 
-	public FundBaseInfo() {		
+	public Fund() {		
 	}
 
 	public String getFundCode() {
@@ -227,6 +231,22 @@ public class FundBaseInfo  extends BaseSearchCondition{
 
 	public void setRefFund(String refFund) {
 		this.refFund = refFund;
+	}
+
+	public Integer getAddUserId() {
+		return addUserId;
+	}
+
+	public void setAddUserId(Integer addUserId) {
+		this.addUserId = addUserId;
+	}
+
+	public Date getAddTime() {
+		return addTime;
+	}
+
+	public void setAddTime(Date addTime) {
+		this.addTime = addTime;
 	}
 	
 	// %%ONLY_FOR_INS_FLD%FI_JAVA_ENTITY_GET_SET%%
