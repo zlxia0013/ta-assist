@@ -124,7 +124,7 @@ desired effect
             </div>
 
 <!-- ./wrapper -->
-
+</div>
 <!-- REQUIRED JS SCRIPTS -->
 
 <!-- jQuery 2.2.3 -->
