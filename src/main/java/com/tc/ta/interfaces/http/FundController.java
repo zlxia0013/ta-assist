@@ -36,11 +36,10 @@ public class FundController extends BaseController {
     public static final String URL_ENTITY = "/fund";
     public static final String URL_GOTO_MAIN_PAGE = URL_ENTITY + "/goto_main_page";
 
-    public static final String URL_GOTO_ADD_PAGE = URL_ENTITY + "/goto_add_page";
-    public static final String URL_ADD = URL_ENTITY + "/add";
+    public static final String URL_GOTO_ADD_UPDATE_INDEX_PAGE = URL_ENTITY + "/goto_add_update_index_page";
 
-    public static final String URL_GOTO_UPDATE_PAGE = URL_ENTITY + "/goto_update_page";
-    public static final String URL_UPDATE = URL_ENTITY + "/update";
+    public static final String URL_GOTO_ADD_UPDATE_PAGE = URL_ENTITY + "/goto_add_update_page";
+    public static final String URL_ADD_UPDATE = URL_ENTITY + "/add_update";
 
     public static final String URL_DELETE = URL_ENTITY + "/delete";
 
@@ -65,18 +64,27 @@ public class FundController extends BaseController {
         return modelAndView;
     }
 
-    @RequestMapping(value = URL_GOTO_ADD_PAGE, method = RequestMethod.GET)
-    public ModelAndView gotoAddPage(HttpSession session) {
+    @RequestMapping(value = URL_GOTO_ADD_UPDATE_INDEX_PAGE, method = RequestMethod.GET)
+    public ModelAndView URL_GOTO_ADD_UPDATE_INDEX_PAGE(HttpSession session) {
         User userInfo = (User) session.getAttribute(CommonKeys.SESSION_USER);
 
-        ModelAndView modelAndView = new ModelAndView("fund/fund_add");
+        ModelAndView modelAndView = new ModelAndView("fund/fund_add_update_index");
+        modelAndView.addObject(CommonJspKeys.JspParam_SessionUserInfo, userInfo);
+        return modelAndView;
+    }
+
+    @RequestMapping(value = URL_GOTO_ADD_UPDATE_PAGE, method = RequestMethod.GET)
+    public ModelAndView URL_GOTO_ADD_UPDATE_PAGE(HttpSession session) {
+        User userInfo = (User) session.getAttribute(CommonKeys.SESSION_USER);
+
+        ModelAndView modelAndView = new ModelAndView("fund/fund_add_update");
         modelAndView.addObject(CommonJspKeys.JspParam_SessionUserInfo, userInfo);
         return modelAndView;
     }
 
 
     @ResponseBody
-    @RequestMapping(value = URL_ADD, method = RequestMethod.POST)
+    @RequestMapping(value = URL_ADD_UPDATE, method = RequestMethod.POST)
     public Json add(Fund fund, HttpSession session) {
         Json json = new Json();
         try {
@@ -97,36 +105,6 @@ public class FundController extends BaseController {
         return json;
     }
 
-    @RequestMapping(value = URL_GOTO_UPDATE_PAGE, method = RequestMethod.GET)
-    public ModelAndView gotoUpdatePage(Integer fundId, HttpSession session) {
-        Fund fundInfo = (Fund) session.getAttribute(CommonKeys.SESSION_USER);
-
-        Fund fund = fundBo.getById(fundId);
-
-        ModelAndView modelAndView = new ModelAndView("fund/fund_update");
-        modelAndView.addObject(CommonJspKeys.JspParam_SessionUserInfo, fundInfo);
-        modelAndView.addObject(FundJspKeys.JspParam_FundInfo, fund);
-        return modelAndView;
-    }
-
-    @ResponseBody
-    @RequestMapping(value = URL_UPDATE, method = RequestMethod.POST)
-    public Json update(Fund fund) {
-        Json json = new Json();
-        try {
-            fundBo.update(fund);
-            json.setSuccess(true);
-        } catch (ComRuntimeException e) {
-            json = new Json(e.getErrorCode(), e.getMessage());
-        } catch (ComSystemException e) {
-            log.error("error", e);
-            json = new Json(e.getErrorCode(), "系统忙... " + e.getMessage());
-        } catch (Throwable e) {
-            log.error("error", e);
-            json = new Json(ReturnCodes.SYSTEM_EXCEPTION, "系统忙... " + e.getMessage());
-        }
-        return json;
-    }
 
     @ResponseBody
     @RequestMapping(value = URL_DELETE, method = RequestMethod.POST)

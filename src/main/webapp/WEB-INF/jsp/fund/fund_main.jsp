@@ -178,7 +178,7 @@ desired effect
 
 
         $("#btnAdd").click(function () {
-            parent.addTab({title: "新增基金", url:"${path}<%=FundController.URL_GOTO_ADD_PAGE%>", id: <%=new Random().nextInt()%>, close: true, single:true});
+            parent.addTab({title: "新增基金", url:"${path}<%=FundController.URL_GOTO_ADD_UPDATE_INDEX_PAGE%>", id: <%=new Random().nextInt()%>, close: true, single:true});
         });
     });
 </script>

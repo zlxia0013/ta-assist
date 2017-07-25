@@ -473,11 +473,11 @@ desired effect
         });
 
         $("#menuFundBaseInfo").click(function () {
-            addTab({title: "基金管理", url:"${path}<%=FundController.URL_GOTO_MAIN_PAGE%>", id: <%=new Random().nextInt()%>, close: true});
+            addTab({title: "基金管理", url:"${path}<%=FundController.URL_GOTO_MAIN_PAGE%>", id: <%=new Random().nextInt()%>, close: true, single:true});
         });
 
         $("#menuDistributor").click(function () {
-            addTab({title: "销售商管理", id: <%=new Random().nextInt()%>, close: true});
+            addTab({title: "销售商管理", id: <%=new Random().nextInt()%>, close: true, single:true});
         });
 
         $("#menuUser").click(function () {

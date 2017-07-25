@@ -8,7 +8,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminLTE 2 | Starter</title>
+    <title>基金基本信息</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
@@ -69,9 +69,6 @@ desired effect
 <body >
 <div class="container">
 
-    <div class="box box-primary">
-        <!-- /.box-header -->
-        <div class="box-body">
             <div class="row">
                 <div class="col-md-12">
                     <div class="form-group">
@@ -125,10 +122,6 @@ desired effect
                     <button type="submit" class="btn btn-primary">保 存</button>
                 </div>
             </div>
-        </div>
-    </div>
-    <!-- /.box -->
-</div>
 
 <!-- ./wrapper -->
 
