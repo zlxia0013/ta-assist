@@ -165,11 +165,11 @@ CREATE TABLE `fare_rate` (
 
 /*Data for the table `fare_rate` */
 
-/*Table structure for table `fund_base_info` */
+/*Table structure for table `fund` */
 
-DROP TABLE IF EXISTS `fund_base_info`;
+DROP TABLE IF EXISTS `fund`;
 
-CREATE TABLE `fund_base_info` (
+CREATE TABLE `fund` (
   `fund_code` varchar(6) DEFAULT NULL COMMENT '基金代码',
   `fund_name` varchar(40) DEFAULT NULL COMMENT '基金名称',
   `fund_english_name` varchar(40) DEFAULT NULL COMMENT '基金英文名',
@@ -191,10 +191,12 @@ CREATE TABLE `fund_base_info` (
   `is_lof` char(1) DEFAULT NULL COMMENT '是否LOF基金',
   `ta_code` varchar(6) DEFAULT NULL COMMENT 'TA代码',
   `is_sync` varchar(1) DEFAULT NULL COMMENT '是否已同步到TA',
-  `ref_fund` varchar(6) DEFAULT NULL COMMENT '同步参考基金代码'
+  `ref_fund` varchar(6) DEFAULT NULL COMMENT '同步参考基金代码',
+  `add_user_id` int(11) DEFAULT NULL COMMENT '添加人',
+  `add_time` datetime DEFAULT NULL COMMENT '添加时间'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='基金基本信息';
 
-/*Data for the table `fund_base_info` */
+/*Data for the table `fund` */
 
 /*Table structure for table `fund_code_change` */
 
@@ -488,11 +490,11 @@ CREATE TABLE `sys_privilege` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `i_sys_privilege_code` (`code`),
   UNIQUE KEY `i_sys_privilege_value` (`value`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 
 /*Data for the table `sys_privilege` */
 
-insert  into `sys_privilege`(`id`,`code`,`value`,`no_limit_access`,`need_login`,`comments`) values (1,'goto_index_page','/goto_index_page',1,1,'打开主页'),(2,'goto_login_page','/goto_login_page',1,0,'打开登陆页面'),(3,'login','/login',1,0,'用户登陆'),(4,'logout','/logout',1,0,'用户注销');
+insert  into `sys_privilege`(`id`,`code`,`value`,`no_limit_access`,`need_login`,`comments`) values (1,'goto_index_page','/goto_index_page',1,1,'打开主页'),(2,'goto_login_page','/goto_login_page',1,0,'打开登陆页面'),(3,'login','/login',1,0,'用户登陆'),(4,'logout','/logout',1,0,'用户注销'),(5,'user_goto_main_page','/user/goto_main_page',0,0,'打开用户管理页面'),(6,'user_goto_add_page','/user/goto_add_page',0,0,'打开新增用户页面'),(7,'user_add','/user/add',0,0,'新增用户'),(8,'user_goto_update_page','/user/goto_update_page',0,0,'打开修改用户页面'),(9,'user_update','/user/update',0,0,'修改用户信息'),(10,'user_delete','/user/delete',0,0,'删除用户'),(11,'user_goto_update_pwd_page','/user/goto_update_pwd_page',1,1,'打开修改密码页面'),(12,'user_update_pwd','/user/update_pwd',1,1,'修改密码'),(13,'fund_goto_main_page','/fund/goto_main_page',0,0,'打开基金管理页面'),(14,'fund_goto_add_page','/fund/goto_add_page',0,0,'打开新增基金页面'),(15,'fund_add','/fund/add',0,0,'新增基金'),(16,'fund_goto_update_page','/fund/goto_update_page',0,0,'打开修改基金页面'),(17,'fund_update','/fund/update',0,0,'修改基金信息'),(18,'fund_delete','/fund/delete',0,0,'删除基金');
 
 /*Table structure for table `sys_role` */
 
