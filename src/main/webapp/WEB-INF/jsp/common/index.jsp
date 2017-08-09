@@ -425,7 +425,7 @@ desired effect
         $(".active").removeClass("active");
 
 //如果TAB不存在，创建一个新的TAB
-        if (!obj.single || !$("#"+ id)[0]) {
+//        if (!$("#"+ id)[0]) {
 //固定TAB中IFRAME高度
             mainHeight = $(document.body).height() - 95;
 //创建新TAB的title
@@ -448,7 +448,7 @@ desired effect
 //加入TABS
             $(".nav-tabs").append(title);
             $(".tab-content").append(content);
-        }
+//        }
 
 //激活TAB
         $("#tab_"+ id).addClass('active');
@@ -473,18 +473,16 @@ desired effect
         });
 
         $("#menuFundBaseInfo").click(function () {
-            addTab({title: "基金管理", url:"${path}<%=FundController.URL_GOTO_MAIN_PAGE%>", id: <%=new Random().nextInt()%>, close: true, single:true});
+            addTab({id: <%=Math.abs(new Random().nextInt())%>, title: "基金管理", url:"${path}<%=FundController.URL_GOTO_MAIN_PAGE%>", close: true});
         });
 
         $("#menuDistributor").click(function () {
-            addTab({title: "销售商管理", id: <%=new Random().nextInt()%>, close: true, single:true});
+            addTab({id: <%=Math.abs(new Random().nextInt())%>, title: "销售商管理", url:"${path}<%=FundController.URL_GOTO_MAIN_PAGE%>", close: true});
         });
 
         $("#menuUser").click(function () {
-            addTab({title: "用户管理", url:"${path}<%=UserController.URL_GOTO_MAIN_PAGE%>", id: <%=new Random().nextInt()%>, close: true, single:true});
+            addTab({id: <%=Math.abs(new Random().nextInt())%>, title: "用户管理", url:"${path}<%=UserController.URL_GOTO_MAIN_PAGE%>", close: true});
         });
-
-
     });
 </script>
 </body>

@@ -97,7 +97,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 //如果TAB不存在，创建一个新的TAB
         if (!obj.single || !$("#"+ id)[0]) {
 //固定TAB中IFRAME高度
-            mainHeight = $(document.body).height() - 95;
+            mainHeight = $(parent.document.body).height() - 95;
+
 //创建新TAB的title
             title = '<li role="presentation" id="tab_' + id + '"><a href="#' + id + '" aria-controls="' + id + '" role="tab" data-toggle="tab">' + obj.title;
 //是否允许关闭
@@ -143,7 +144,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
         });
 
         addTab({title: "基金基本信息", url:"${path}<%=FundController.URL_GOTO_ADD_UPDATE_PAGE%>", id: <%=new Random().nextInt()%>, close: false});
-
 
     });
 </script>
