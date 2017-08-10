@@ -51,6 +51,9 @@ public class CommonInterceptor extends HandlerInterceptorAdapter {
                              HttpServletResponse response, Object handler) throws Exception {
         String requestUri = request.getRequestURI();
         String contextPath = request.getContextPath();
+        if ("/".equals(contextPath)) {
+            contextPath = "";
+        }
         String url = requestUri.substring(contextPath.length());
 
         log.info("requestUri:" + requestUri);
